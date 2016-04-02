@@ -51,3 +51,5 @@ gem 'sidekiq'
 # for sending emails in the background
 gem 'devise-async'
 gem 'simple_form'
+gem 'apartment'
+gem 'puma'

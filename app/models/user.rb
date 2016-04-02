@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
          :confirmable, :async 
          
          validate :email_is_unique, on: :create
+         validate :subdomain_is_unique,on: :create 
+         after_validation :create_tenant
          after_create :create_account
 
          def confirmation_required?
@@ -16,18 +18,35 @@ class User < ActiveRecord::Base
          private
          # Email should be uniqe in Accaount Model
          def email_is_unique
-         	# email should be unique in account model this is 
-         	# to not revalidate account from user and devise showing the 
-         	# same error twice
-         	return false unless self.errors[:email].empty?
-
-         	unless Account.find_by_email(email).nil?
-         		errors.add(:email,'is already taken private says')
-         	end
+            if email.present?
+                unless Account.find_by_email(email).nil?
+                    errors.add(:email,"is already used")
+                end
+            end
+        end
+         	   
+         # Subdomain should be unique in account model
+         def subdomain_is_unique
+            if subdomain.present?
+                unless Account.find_by_subdomain(subdomain).nil?
+                    errors.add(:subdomain,"is already taken")
+                end
+            # tenant name should not be from the excluded list 
+                if Apartment::Elevators::Subdomain.excluded_subdomains.include?(subdomain)
+                    errors.add(:subdomain,"is a reserved subdomain.")
+                end
+            end
          end
 
+         def create_tenant
+            Apartment::Tenant.create(subdomain)
+            Apartment::Tenant.switch!(subdomain)
+        end
+
+
+
          def create_account
-         	account=Account.new(:email=>email)
+         	account=Account.new(:email=>email,:subdomain=>subdomain)
          	account.save
          end
 end
