@@ -52,4 +52,5 @@ gem 'sidekiq'
 gem 'devise-async'
 gem 'simple_form'
 gem 'apartment'
+#puma server 
 gem 'puma'

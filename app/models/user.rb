@@ -32,7 +32,7 @@ class User < ActiveRecord::Base
                     errors.add(:subdomain,"is already taken")
                 end
             # tenant name should not be from the excluded list 
-                if Apartment::Elevators::Subdomain.excluded_subdomains.include?(subdomain)
+            if Apartment::Elevators::Subdomain.excluded_subdomains.include?(subdomain)
                     errors.add(:subdomain,"is a reserved subdomain.")
                 end
             end
