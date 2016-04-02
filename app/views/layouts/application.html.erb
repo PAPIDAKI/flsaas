@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Flsaas</title>
+  <title>Freshlogs</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
-<body>
-	<p class="notice"><%= notice %></p>
-	<p class="alert"><%= alert %></p>
-	
-	<%= yield %>
+<body> 
+	<% flash.each do |type, message|%>
+		<div class="alert <%=bootstrap_class_for (type)%> alert-dismissible" role ="alert">
+			<!-- <button type="button" class="close" data-dismiss="alert" aria-label="Close" <span"aria-hidden="true"> &times;</span> -->
+		<%= message %>
+		</div>
+	<%end%>
 
+	<%= yield %>
 
 </body>
 </html>

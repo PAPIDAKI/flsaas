@@ -3,13 +3,13 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
-         :confirmable
+         :confirmable, :async 
          
          validate :email_is_unique, on: :create
          after_create :create_account
 
          def confirmation_required?
-         	false
+         	true
          end
 
 
