@@ -4,6 +4,7 @@ Rails.application.configure do
   # Code is not reloaded between requests.
   config.cache_classes = true
 
+  config.action_mailer.default_url_options = { host: 'www.freshlogs.com' }
   # sendgrid config
   ActionMailer::Base.delivery_method = :smtp
   ActionMailer::Base.smtp_settings = {
