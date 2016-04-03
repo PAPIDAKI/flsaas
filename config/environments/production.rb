@@ -4,6 +4,7 @@ Rails.application.configure do
   # Code is not reloaded between requests.
   config.cache_classes = true
 
+    # email set up for devise
   config.action_mailer.default_url_options = { host: 'www.freshlogs.com' }
   # sendgrid config
   ActionMailer::Base.delivery_method = :smtp

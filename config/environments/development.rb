@@ -6,6 +6,7 @@ Rails.application.configure do
   # since you don't have to restart the web server when you make code changes.
   config.cache_classes = false
 
+  # email set up for devise
   config.action_mailer.default_url_options = { host: 'localhost:3000' }
   # Sendgrid setup 
   ActionMailer::Base.delivery_method = :smtp
