@@ -52,6 +52,7 @@ gem 'sidekiq'
 gem 'devise-async'
 gem 'simple_form'
 gem 'apartment'
+gem 'apartment-sidekiq' #for correct usage of users and tenant jobs 
 #puma server 
 gem 'puma'
 # Invite users and open emails
